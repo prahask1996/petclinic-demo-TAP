@@ -3,7 +3,10 @@ pipeline{
   stages{
     stage('create AWS stack'){
       steps {
-      echo "creating aws clowdFormation stack"
+        echo "creating aws clowdFormation stack"
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'prahas_accessKeys', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        sh 'aws s3 ls'
+        }
       }
     }
   }
